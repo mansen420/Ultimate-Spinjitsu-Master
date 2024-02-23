@@ -255,10 +255,10 @@ def main():
         global winner_text
         if player1.lives <= 0:
             game_active = False
-            winner_text = "player 2 won!"
+            winner_text = "green ninja won!"
         elif player2.lives <= 0:
             game_active = False
-            winner_text = "player 1 won!"
+            winner_text = "red ninja won!"
         
         # Update
         all_sprites.update(platforms, WIDTH, HEIGHT)
