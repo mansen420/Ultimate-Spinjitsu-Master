@@ -1,5 +1,6 @@
 import pygame
 import sys
+from os.path import normcase
 from player import Player
 from platform_1 import Platform
 
@@ -21,7 +22,7 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 FONT_SIZE = 36
-BACKGROUND = pygame.image.load("assets/background_enhanced.jpg")
+BACKGROUND = pygame.image.load(normcase("assets/background_enhanced.jpg"))
 lives = 5  # Number of lives for each player
 winner_text = ""
 FPS = 60
@@ -36,14 +37,14 @@ player1_ammo = MAX_BULLETS
 player2_ammo = MAX_BULLETS
 
 # bullet sounds
-BULLET_HIT_SOUND = pygame.mixer.Sound("assets\\086553_bullet-hit-39853.mp3")
-BULLET_FIRE_SOUND = pygame.mixer.Sound("assets\\desert-eagle-gunshot-14622.mp3")
-RELOAD_SOUND = pygame.mixer.Sound("assets\\revolvercock1-6924.mp3")
-NO_AMMO_SOUND = pygame.mixer.Sound("assets\\empty-gun-shot-6209.mp3")
+BULLET_HIT_SOUND = pygame.mixer.Sound(normcase("assets/086553_bullet-hit-39853.mp3"))
+BULLET_FIRE_SOUND = pygame.mixer.Sound(normcase("assets/desert-eagle-gunshot-14622.mp3"))
+RELOAD_SOUND = pygame.mixer.Sound(normcase("assets/revolvercock1-6924.mp3"))
+NO_AMMO_SOUND = pygame.mixer.Sound(normcase("assets/empty-gun-shot-6209.mp3"))
 
 # background music
-main_game_music = pygame.mixer.Sound('assets\\wii-shop-channel-background-music-hd.mp3')
-main_menu_music = pygame.mixer.Sound('assets\\gaming-background-music-hd.mp3')
+main_game_music = pygame.mixer.Sound(normcase('assets/wii-shop-channel-background-music-hd.mp3'))
+main_menu_music = pygame.mixer.Sound(normcase('assets/gaming-background-music-hd.mp3'))
 
 PLAYER_1_HIT = pygame.USEREVENT + 1
 PLAYER_2_HIT = pygame.USEREVENT + 2
