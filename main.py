@@ -31,6 +31,7 @@ PLATFORM_COLOR = (215, 113, 101)
 # bullets
 MAX_BULLETS = 5
 BULLET_VEL = 20
+BULLET_VEL_FACTOR = 1.0
 player1_bullets = []
 player2_bullets = []
 player1_ammo = MAX_BULLETS
@@ -135,9 +136,9 @@ def handle_bullets():
     for bullet in player1_bullets:
         pygame.draw.rect(screen, 'red', bullet)
         if player2.rect.center > player1.rect.center:
-            bullet.x += BULLET_VEL
+            bullet.x += BULLET_VEL * BULLET_VEL_FACTOR
         else:
-            bullet.x -= BULLET_VEL
+            bullet.x -= BULLET_VEL * BULLET_VEL_FACTOR
         if bullet.colliderect(player2.rect):
             player1_bullets.remove(bullet)
             pygame.event.post(pygame.event.Event(PLAYER_2_HIT))
@@ -148,9 +149,9 @@ def handle_bullets():
     for bullet in player2_bullets:
         pygame.draw.rect(screen, 'green', bullet)
         if player1.rect.center < player2.rect.center:
-            bullet.x -= BULLET_VEL
+            bullet.x -= BULLET_VEL * BULLET_VEL_FACTOR
         else:
-            bullet.x += BULLET_VEL
+            bullet.x += BULLET_VEL * BULLET_VEL_FACTOR
         if bullet.colliderect(player1.rect):
             player2_bullets.remove(bullet)
             pygame.event.post(pygame.event.Event(PLAYER_1_HIT))
@@ -215,13 +216,19 @@ def main():
                 BULLET_HIT_SOUND.play()
         
         FPS = 60
+        global BULLET_VEL_FACTOR
+        BULLET_VEL_FACTOR = 1.0
+        player1.vel_factor = 1.0
+        player2.vel_factor = 1.0
         for bullet in player1_bullets:
             if bullet.colliderect(player2.slow_motion_zone):
-                FPS = 20
+                BULLET_VEL_FACTOR  = 0.2 #!! TODO just reduce the bullet speed? FIXME make the collide zone a circle, maybe highlight it with some color
+                player2.vel_factor = 0.2
         
         for bullet in player2_bullets:
             if bullet.colliderect(player1.slow_motion_zone):
-                FPS = 20
+                BULLET_VEL_FACTOR = 0.2
+                player1.vel_factor = 0.2
         
         # ammo box reload
         left_dummy_timer += 1
